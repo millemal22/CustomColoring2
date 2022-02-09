@@ -49,13 +49,13 @@ public class MainActivity extends AppCompatActivity {
         blueSeek.setOnSeekBarChangeListener(BseekListener);
 
         //Shape Array
-        Shapes[] shapeArray = new Shapes[6];
-        shapeArray[0] = new ShapeMaker("Circle 0", shapeArray[0].getColor());
-        shapeArray[1] = new ShapeMaker("Circle 1", shapeArray[1].getColor());
-        shapeArray[2] = new ShapeMaker("Circle 2", shapeArray[2].getColor());
-        shapeArray[3] = new ShapeMaker("Circle 3", shapeArray[3].getColor());
-        shapeArray[4] = new ShapeMaker("Circle 4", shapeArray[4].getColor());
-        shapeArray[5] = new ShapeMaker("Circle 5", shapeArray[5].getColor());
+        //Shapes[] shapeArray = new Shapes[6];
+        //shapeArray[0] = new ShapeMaker("Circle 0", shapeArray[0].getColor());
+        //shapeArray[1] = new ShapeMaker("Circle 1", shapeArray[1].getColor());
+        //shapeArray[2] = new ShapeMaker("Circle 2", shapeArray[2].getColor());
+        //shapeArray[3] = new ShapeMaker("Circle 3", shapeArray[3].getColor());
+        //shapeArray[4] = new ShapeMaker("Circle 4", shapeArray[4].getColor());
+        //shapeArray[5] = new ShapeMaker("Circle 5", shapeArray[5].getColor());
 
     }
 }

@@ -10,7 +10,6 @@ public abstract class Shapes {
 
     public static final int TAP_MARGIN = 10;
 
-    protected Paint outline = new Paint(Color.BLACK);
     protected String eleName = "Current Element";
     protected Paint myPaint = new Paint();
 
@@ -35,11 +34,11 @@ public abstract class Shapes {
     }
 
 
-    public abstract void drawMe(Canvas canvas, Shapes[] shapes);
+    public abstract void drawMe(Canvas canvas);
 
     public abstract boolean containsPoint(int x, int y);
 
-    public abstract int getSize();
+    public abstract String getName();
 
 }
 

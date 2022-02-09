@@ -7,14 +7,22 @@ public class ShapeMaker extends Shapes{
     private int x;
     private int y;
     private int radius;
+    ShapeMaker[] shapes = new ShapeMaker[6];
 
 
     public ShapeMaker(String name, int color, int x, int y, int radius){
         super(name, color);
+    }
 
-        this.x = x;
-        this.y = y;
-        this.radius = radius;
+    //uyfeahufhajfkdshnafjkdshafkjdsjfds uuuuuuuggggggghhhhhhhhhhhhhh
+    public ShapeMaker newShape(String name, int color, int x, int y, int radius){
+        //this.name = name;
+        //this.color = color;
+        //this.x = x;
+        //this.y = y;
+        //this.radius = radius;
+
+        return null;
     }
 
     public ShapeMaker(String name, int paintColor) {
@@ -23,11 +31,7 @@ public class ShapeMaker extends Shapes{
     }
 
     @Override
-    public void drawMe(Canvas canvas, Shapes[] shapes){
-            for (int i=0; i<6; i++){
-                Paint color = new Paint(shapes[i].paintColor);
-                canvas.drawOval(this.x, this.y, this.x+(2*this.radius), this.y+(2*this.radius), color);
-            }
+    public void drawMe(Canvas canvas){
         }
 
     @Override
@@ -40,7 +44,7 @@ public class ShapeMaker extends Shapes{
     }
 
     @Override
-    public int getSize(){
-        return (int)(Math.PI*this.radius*this.radius);
+    public String getName(){
+        return null;
     }
 }

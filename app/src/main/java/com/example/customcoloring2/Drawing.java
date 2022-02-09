@@ -50,6 +50,9 @@ public class Drawing extends SurfaceView {
     //should draw a circle just to test if the color slider works.
     public void onDraw(Canvas canvas){
         super.onDraw(canvas);
-
+        //for loop to pick which circle is drawn?
+        canvas.drawOval(100, 100, 200, 200, paintColor);
+        canvas.drawOval(200, 200, 300, 300, paintColor);
+        canvas.drawOval(300, 300, 400, 400, paintColor);
     }
 }

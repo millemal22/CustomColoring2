@@ -13,23 +13,28 @@ public class ElementChange implements View.OnTouchListener {
     }
 
     //Should register touch
-    public boolean OnTouch(View view, MotionEvent motionEvent) {
-
+    public boolean OnTouch(View view, MotionEvent motionEvent, Shapes shape) {
         return true;
+    }
 
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent, Shapes shape) {
+
+       //TextView element = findViewById(R.id.element);
+
+       //for (int i=0; i<6; i++){
+        //   if (shape.containsPoint(motionEvent.getX(), motionEvent.getY())){
+        //       element.setText(shape.getName());
+
+         //  }
+       //}
+
+        return false;
     }
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
 
-       // TextView element = findViewById(R.id.element);
-
-       // for (int i=0; i<6; i++){
-           // if (shapeArray[i].containsPoint(motionEvent.getX(), motionEvent.getY())){
-         //       element.setText(shapeArray[i].name);
-            //}
-        //}
-
-        return false;
+        return false;s4r
     }
 }
