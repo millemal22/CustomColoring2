@@ -17,7 +17,6 @@ public class ElementChange implements View.OnTouchListener {
         return true;
     }
 
-    @Override
     public boolean onTouch(View view, MotionEvent motionEvent, Shapes shape) {
 
        //TextView element = findViewById(R.id.element);
@@ -35,6 +34,6 @@ public class ElementChange implements View.OnTouchListener {
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
 
-        return false;s4r
+        return false;
     }
 }

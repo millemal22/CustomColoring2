@@ -13,6 +13,11 @@ public class Drawing extends SurfaceView {
 
     //paint instance
     Paint paintColor = new Paint();
+    ShapeMaker[] shapes = getShapeArray();
+    private int color;
+    private int x;
+    private int y;
+    private int radius;
 
     //makes the drawing?
     public Drawing(Context context){
@@ -28,14 +33,14 @@ public class Drawing extends SurfaceView {
         setWillNotDraw(false);
     }
 
-    //also makes the drawing also
+    //also also makes the drawing also
     public Drawing (Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initPaints();
         setWillNotDraw(false);
     }
 
-    //changes the paintbrush and paintcolor
+    //changes the paintbrush and paint color
     private void initPaints(){
         this.paintColor.getColor();
         this.paintColor.setColor(Color.BLACK);
@@ -51,8 +56,12 @@ public class Drawing extends SurfaceView {
     public void onDraw(Canvas canvas){
         super.onDraw(canvas);
         //for loop to pick which circle is drawn?
-        canvas.drawOval(100, 100, 200, 200, paintColor);
-        canvas.drawOval(200, 200, 300, 300, paintColor);
-        canvas.drawOval(300, 300, 400, 400, paintColor);
+        //canvas.drawOval(100, 100, 200, 200, paintColor);
+        //canvas.drawOval(200, 200, 300, 300, paintColor);
+        //canvas.drawOval(300, 300, 400, 400, paintColor);
+
+        insert(shapes, canvas);
     }
+
+
 }
