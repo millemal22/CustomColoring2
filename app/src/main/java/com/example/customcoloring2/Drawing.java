@@ -52,7 +52,11 @@ public class Drawing extends SurfaceView {
         this.invalidate();
     }
 
+    //right now this method isn't called, but it was supposed to make each circle individually so they are different colors
     public void insert(ShapeMaker[] shapes, Canvas canvas){
+
+        setWillNotDraw(false);
+        this.shapeArray = shapes;
 
         for (int i=0; i<6; i++){
             Paint paintColor = new Paint(shapes[i].getColor());
@@ -60,39 +64,28 @@ public class Drawing extends SurfaceView {
         }
     }
 
-    //public void makeShapeArray(){
-        //Shape Array
-   //     shapeArray[0] = new NewShape("Circle 0", shapeArray[0].getColor(), 100, 100 ,100);
-     //   shapeArray[1] = new NewShape("Circle 1", shapeArray[1].getColor(), 200, 200, 100);
-       // shapeArray[2] = new NewShape("Circle 2", shapeArray[2].getColor(), 300, 300, 100);
-  //      shapeArray[3] = new NewShape("Circle 3", shapeArray[3].getColor(), 400, 400, 100);
-    //    shapeArray[4] = new NewShape("Circle 4", shapeArray[4].getColor(), 500, 500, 100);
-      //  shapeArray[5] = new NewShape("Circle 5", shapeArray[5].getColor(), 600 , 600, 100);
-    //}
 
-//    public ShapeMaker[] getShapeArray(){ return (ShapeMaker[]) shapeArray;}
-
-    //should draw a circle just to test if the color slider works.
-    public void onDraw(Canvas canvas){
+    //should draw the test circles
+    public void onDraw(Canvas canvas, ShapeMaker[] shapes){
         super.onDraw(canvas);
+        setWillNotDraw(false);
+        this.shapeArray = shapes;
 
-        //for loop to pick which circle is drawn?
-        canvas.drawOval(100, 100, 200, 200, paintColor);
-        canvas.drawOval(100, 200, 200, 300, paintColor);
-        canvas.drawOval(100, 300, 200, 400, paintColor);
-        canvas.drawOval(300, 100, 400, 200, paintColor);
-        canvas.drawOval(300, 200, 400, 300, paintColor);
-        canvas.drawOval(300, 300, 400, 400, paintColor);
+        //draws my circles
+        canvas.drawOval(50, 50, 350, 300, paintColor);
+        canvas.drawOval(50, 350, 350, 600, paintColor);
+        canvas.drawOval(50, 650, 350, 900, paintColor);
+        canvas.drawOval(800, 50, 1100, 300, paintColor);
+        canvas.drawOval(800, 350, 1100, 600, paintColor);
+        canvas.drawOval(800, 650, 1100, 900, paintColor);
 
+        //I could not get the variables to carry over when I set this.shapeArray = shapes
+        for (int i=0; i<6; i++){
+            Paint paintColor = new Paint(shapes[i].color);
+            canvas.drawOval(shapes[i].x, shapes[i].y, (shapes[i].x + shapes[i].radius), (shapes[i].y + shapes[i].radius), paintColor);
+        }
 
-
-    }
-
-    public void reDraw(Canvas canvas, ShapeMaker shape){
-
-        int x2 = shape.x + shape.radius;
-        int y2 = shape.y + shape.radius;
-        canvas.drawOval(shape.x, shape.y, x2, y2, paintColor);
+        //insert(shapes, canvas);
 
     }
 

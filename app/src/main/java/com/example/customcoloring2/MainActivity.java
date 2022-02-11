@@ -52,23 +52,26 @@ public class MainActivity extends AppCompatActivity {
         greenSeek.setOnSeekBarChangeListener(GseekListener);
         blueSeek.setOnSeekBarChangeListener(BseekListener);
 
-        //TextView Listener for Element Name
-        TextView msg = findViewById(R.id.element);
-        View.OnTouchListener touch = new ElementChange(msg, drawing);
-        drawing.setOnTouchListener(touch);
-
         //Shapes
-        ShapeMaker shape1 = new ShapeMaker("circle1", 0xFF000000, 100, 100, 100);
-        ShapeMaker shape2 = new ShapeMaker("circle2", 0xFF000000, 100, 200, 100);
-        ShapeMaker shape3 = new ShapeMaker("circle3", 0xFF000000, 100, 300, 100);
-        ShapeMaker shape4 = new ShapeMaker("circle4", 0xFF000000, 300, 100, 100);
-        ShapeMaker shape5 = new ShapeMaker("circle5", 0xFF000000, 300, 200, 100);
-        ShapeMaker shape6 = new ShapeMaker("circle6", 0xFF000000, 300, 300, 100);
+        ShapeMaker shape1 = new ShapeMaker("circle1", 0xFFFFFFFF, 50, 100, 300);
+        ShapeMaker shape2 = new ShapeMaker("circle2", 0xFFFFFFFF, 50, 500, 300);
+        ShapeMaker shape3 = new ShapeMaker("circle3", 0xFFFFFFFF, 50, 900, 300);
+        ShapeMaker shape4 = new ShapeMaker("circle4", 0xFFFFFFFF, 800, 100, 300);
+        ShapeMaker shape5 = new ShapeMaker("circle5", 0xFFFFFFFF, 800, 500, 300);
+        ShapeMaker shape6 = new ShapeMaker("circle6", 0xFFFFFFFF, 800, 900, 300);
 
         //Shape Array
-        //shapeArray
+        shapeArray[0] = shape1;
+        shapeArray[1] = shape2;
+        shapeArray[2] = shape3;
+        shapeArray[3] = shape4;
+        shapeArray[4] = shape5;
+        shapeArray[5] = shape6;
 
-
+        //TextView Listener for Element Name
+        TextView msg = findViewById(R.id.element);
+        View.OnTouchListener touch = new ElementChange(msg, drawing, shapeArray);
+        drawing.setOnTouchListener(touch);
     }
 
 }

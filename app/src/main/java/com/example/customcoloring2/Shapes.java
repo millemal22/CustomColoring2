@@ -5,10 +5,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.shapes.OvalShape;
 
-//will eventually be my picture
+//I don't actually think I ended up using this class
 public abstract class Shapes {
 
-    public static final int TAP_MARGIN = 10;
 
     protected String eleName = "Current Element";
     protected Paint myPaint = new Paint();
@@ -17,6 +16,7 @@ public abstract class Shapes {
         setColor(paintColor);
         this.eleName = name;
     }
+
 
     public String getEleName() {
         return this.eleName;
@@ -35,8 +35,6 @@ public abstract class Shapes {
 
 
     public abstract void drawMe(Canvas canvas);
-
-    public abstract boolean containsPoint(int x, int y);
 
     public abstract String getName();
 
