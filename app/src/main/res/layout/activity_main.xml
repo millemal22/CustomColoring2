@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:outlineProvider="none"
-                android:text="Current Element"
+                android:text=""
                 android:textSize="34sp" />
 
             <com.example.customcoloring2.Drawing

@@ -3,15 +3,16 @@ package com.example.customcoloring2;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.shapes.Shape;
 
 public class ShapeMaker extends Shapes{
-    private int x;
-    private int y;
-    private int radius;
+    String name;
+    int color;
+    int x;
+    int y;
+    int radius;
 
-    public ShapeMaker(String name, int color, int x, int y, int radius){
-        super(name, color);
-    }
+    public ShapeMaker(String name, int color, int x, int y, int radius){ super(name, color); }
 
 
     public ShapeMaker(String name, int paintColor) {

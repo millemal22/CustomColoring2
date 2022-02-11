@@ -1,5 +1,6 @@
 package com.example.customcoloring2;
 
+import android.graphics.drawable.shapes.OvalShape;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
@@ -7,33 +8,20 @@ import android.widget.TextView;
 
 public class ElementChange implements View.OnTouchListener {
     private Drawing drawing = null;
+    private TextView message;
 
-    public void TouchListener(Drawing initDrawing) {
+
+    //Change name
+    public ElementChange(TextView msg, Drawing initDrawing) {
+
         this.drawing = initDrawing;
-    }
-
-    //Should register touch
-    public boolean OnTouch(View view, MotionEvent motionEvent, Shapes shape) {
-        return true;
-    }
-
-    public boolean onTouch(View view, MotionEvent motionEvent, Shapes shape) {
-
-       //TextView element = findViewById(R.id.element);
-
-       //for (int i=0; i<6; i++){
-        //   if (shape.containsPoint(motionEvent.getX(), motionEvent.getY())){
-        //       element.setText(shape.getName());
-
-         //  }
-       //}
-
-        return false;
+        this.message = msg;
     }
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
 
+        this.message.setText("works");
         return false;
     }
 }

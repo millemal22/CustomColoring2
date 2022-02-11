@@ -2,8 +2,9 @@ package com.example.customcoloring2;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 
-public class NewShape extends ShapeMaker{
+public class NewShape extends ShapeMaker {
 
     private String name;
     private int color;
@@ -24,11 +25,7 @@ public class NewShape extends ShapeMaker{
 
         return NewShape(name, color, x, y, radius);
     }
-
-
-    public void insert(ShapeMaker[] shapes, Canvas canvas){
-        for (int i=0; i<6; i++){
-            canvas.drawOval(shapes[i].x, shapes[i].y, (shapes[i].x + shapes[i].radius), (shapes[i].y + shapes[i].radius), paintColor);
-        }
-    }
 }
+
+
+

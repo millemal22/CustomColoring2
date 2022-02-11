@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.TouchDelegate;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -14,7 +16,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     int hex;
-    public Shapes[] shapeArray = new Shapes[6];
+    public ShapeMaker[] shapeArray = new ShapeMaker[6];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,23 +42,33 @@ public class MainActivity extends AppCompatActivity {
         SeekBar blueSeek = findViewById(R.id.blueSeekBar);
         blueSeek.setProgress(0);
 
-        //Seekbar Updates
+        //Seekbar Color Updates
         SeekBar.OnSeekBarChangeListener GseekListener = new SeekBarHandler(greenBar, redSeek, greenSeek, blueSeek, drawing);
         SeekBar.OnSeekBarChangeListener RseekListener = new SeekBarHandler(redBar, redSeek, greenSeek, blueSeek, drawing);
         SeekBar.OnSeekBarChangeListener BseekListener = new SeekBarHandler(blueBar, redSeek, greenSeek, blueSeek, drawing);
 
+        //Seekbar Listeners
         redSeek.setOnSeekBarChangeListener(RseekListener);
         greenSeek.setOnSeekBarChangeListener(GseekListener);
         blueSeek.setOnSeekBarChangeListener(BseekListener);
 
+        //TextView Listener for Element Name
+        TextView msg = findViewById(R.id.element);
+        View.OnTouchListener touch = new ElementChange(msg, drawing);
+        drawing.setOnTouchListener(touch);
+
+        //Shapes
+        ShapeMaker shape1 = new ShapeMaker("circle1", 0xFF000000, 100, 100, 100);
+        ShapeMaker shape2 = new ShapeMaker("circle2", 0xFF000000, 100, 200, 100);
+        ShapeMaker shape3 = new ShapeMaker("circle3", 0xFF000000, 100, 300, 100);
+        ShapeMaker shape4 = new ShapeMaker("circle4", 0xFF000000, 300, 100, 100);
+        ShapeMaker shape5 = new ShapeMaker("circle5", 0xFF000000, 300, 200, 100);
+        ShapeMaker shape6 = new ShapeMaker("circle6", 0xFF000000, 300, 300, 100);
+
         //Shape Array
-        shapeArray[0] = new NewShape("Circle 0", shapeArray[0].getColor(), 100, 100 ,100);
-        shapeArray[1] = new NewShape("Circle 1", shapeArray[1].getColor(), 200, 200, 100);
-        shapeArray[2] = new NewShape("Circle 2", shapeArray[2].getColor(), 300, 300, 100);
-        shapeArray[3] = new NewShape("Circle 3", shapeArray[3].getColor(), 400, 400, 100);
-        shapeArray[4] = new NewShape("Circle 4", shapeArray[4].getColor(), 500, 500, 100);
-        shapeArray[5] = new NewShape("Circle 5", shapeArray[5].getColor(), 600 , 600, 100);
+        //shapeArray
+
+
     }
 
-    public ShapeMaker[] getShapeArray(){ return (ShapeMaker[]) shapeArray;}
 }
