@@ -41,7 +41,7 @@ public class ElementChange implements View.OnTouchListener {
 
             if (containsPoint(this.shapeArray[i].x, this.shapeArray[i].y, this.tapX, this.tapY) == true) {
                 this.message.setText(this.shapeArray[i].name);
-                reDraw(canvas, shapeArray[i]);
+                reDraw(canvas, this.shapeArray[i]);
             }
         }
         return false;
@@ -60,7 +60,10 @@ public class ElementChange implements View.OnTouchListener {
 
         int x2 = shape.x + shape.radius;
         int y2 = shape.y + shape.radius;
-        shape.color = this.drawing.getSolidColor();
-        Drawing redo = new Drawing(this.drawing.getContext());
+        this.drawing.setPaintColor(shape.color);
+
+        //this should have reassigned the shape to have the slider color
+        //shape.color = this.drawing.getSolidColor();
+        //Drawing redo = new Drawing(this.drawing.getContext());
     }
 }

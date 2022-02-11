@@ -53,23 +53,23 @@ public class Drawing extends SurfaceView {
     }
 
     //right now this method isn't called, but it was supposed to make each circle individually so they are different colors
-    public void insert(ShapeMaker[] shapes, Canvas canvas){
+    //public void insert(ShapeMaker[] shapes, Canvas canvas){
 
-        setWillNotDraw(false);
-        this.shapeArray = shapes;
+        //setWillNotDraw(false);
+        //this.shapeArray = shapes;
 
-        for (int i=0; i<6; i++){
-            Paint paintColor = new Paint(shapes[i].getColor());
-            canvas.drawOval(shapes[i].x, shapes[i].y, (shapes[i].x + shapes[i].radius), (shapes[i].y + shapes[i].radius), paintColor);
-        }
-    }
+        //for (int i=0; i<6; i++){
+            //Paint paintColor = new Paint(shapes[i].getColor());
+            //canvas.drawOval(shapes[i].x, shapes[i].y, (shapes[i].x + shapes[i].radius), (shapes[i].y + shapes[i].radius), paintColor);
+        //}
+    //}
 
 
     //should draw the test circles
-    public void onDraw(Canvas canvas, ShapeMaker[] shapes){
+    public void onDraw(Canvas canvas/*, ShapeMaker[] shapes*/){
         super.onDraw(canvas);
         setWillNotDraw(false);
-        this.shapeArray = shapes;
+        //this.shapeArray = shapes;
 
         //draws my circles
         canvas.drawOval(50, 50, 350, 300, paintColor);
@@ -80,10 +80,10 @@ public class Drawing extends SurfaceView {
         canvas.drawOval(800, 650, 1100, 900, paintColor);
 
         //I could not get the variables to carry over when I set this.shapeArray = shapes
-        for (int i=0; i<6; i++){
-            Paint paintColor = new Paint(shapes[i].color);
-            canvas.drawOval(shapes[i].x, shapes[i].y, (shapes[i].x + shapes[i].radius), (shapes[i].y + shapes[i].radius), paintColor);
-        }
+        //for (int i=0; i<6; i++){
+        //    Paint paintColor = new Paint(shapes[i].color);
+        //    canvas.drawOval(shapes[i].x, shapes[i].y, (shapes[i].x + shapes[i].radius), (shapes[i].y + shapes[i].radius), paintColor);
+        //}
 
         //insert(shapes, canvas);
 
