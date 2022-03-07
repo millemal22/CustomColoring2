@@ -1,5 +1,4 @@
 package com.example.customcoloring2;
-
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -14,13 +13,15 @@ public class SeekBarHandler implements SeekBar.OnSeekBarChangeListener {
     private SeekBar blueSeek;
     private int hex;
     private Drawing draw;
+    private ShapeMaker[] array = new ShapeMaker[6];
 
-    public SeekBarHandler(TextView count, SeekBar r, SeekBar g, SeekBar b, Drawing d) {
+    public SeekBarHandler(TextView count, SeekBar r, SeekBar g, SeekBar b, Drawing d, ShapeMaker[] shapeArray) {
         this.updateMe = count;
         redSeek = r;
         greenSeek = g;
         blueSeek = b;
         draw = d;
+        array = shapeArray;
     }
 
     @Override

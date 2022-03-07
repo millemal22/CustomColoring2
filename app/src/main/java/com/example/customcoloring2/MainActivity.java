@@ -23,6 +23,45 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Shapes
+        ShapeMaker shape1 = new ShapeMaker();
+        ShapeMaker shape2 = new ShapeMaker();
+        ShapeMaker shape3 = new ShapeMaker();
+        ShapeMaker shape4 = new ShapeMaker();
+        ShapeMaker shape5 = new ShapeMaker();
+        ShapeMaker shape6 = new ShapeMaker();
+
+        //Shape Array
+        shape1.x = 50;
+        shape1.y = 50;
+        shape1.name = "Shape 1";
+        shapeArray[0] = shape1;
+
+        shape2.x = 50;
+        shape2.y = 350;
+        shape2.name = "Shape 2";
+        shapeArray[1] = shape2;
+
+        shape3.x = 50;
+        shape3.y = 650;
+        shape3.name = "Shape 3";
+        shapeArray[2] = shape3;
+
+        shape4.x = 800;
+        shape4.y = 50;
+        shape4.name = "Shape 4";
+        shapeArray[3] = shape4;
+
+        shape5.x = 800;
+        shape5.y = 350;
+        shape5.name = "Shape 5";
+        shapeArray[4] = shape5;
+
+        shape6.x = 800;
+        shape6.y = 650;
+        shape6.name = "Shape 6";
+        shapeArray[5] = shape6;
+
         //drawing widget
         Drawing drawing = findViewById(R.id.drawing);
         //Red Seekbar Listener
@@ -43,34 +82,18 @@ public class MainActivity extends AppCompatActivity {
         blueSeek.setProgress(0);
 
         //Seekbar Color Updates
-        SeekBar.OnSeekBarChangeListener GseekListener = new SeekBarHandler(greenBar, redSeek, greenSeek, blueSeek, drawing);
-        SeekBar.OnSeekBarChangeListener RseekListener = new SeekBarHandler(redBar, redSeek, greenSeek, blueSeek, drawing);
-        SeekBar.OnSeekBarChangeListener BseekListener = new SeekBarHandler(blueBar, redSeek, greenSeek, blueSeek, drawing);
+        SeekBar.OnSeekBarChangeListener GseekListener = new ElementChange(greenBar, drawing, shapeArray, redSeek, greenSeek, blueSeek);
+        SeekBar.OnSeekBarChangeListener RseekListener = new ElementChange(redBar, drawing, shapeArray, redSeek, greenSeek, blueSeek);
+        SeekBar.OnSeekBarChangeListener BseekListener = new ElementChange(blueBar, drawing, shapeArray, redSeek, greenSeek, blueSeek);
 
         //Seekbar Listeners
         redSeek.setOnSeekBarChangeListener(RseekListener);
         greenSeek.setOnSeekBarChangeListener(GseekListener);
         blueSeek.setOnSeekBarChangeListener(BseekListener);
 
-        //Shapes
-        ShapeMaker shape1 = new ShapeMaker("circle1", 0xFFFFFFFF, 50, 100, 300);
-        ShapeMaker shape2 = new ShapeMaker("circle2", 0xFFFFFFFF, 50, 500, 300);
-        ShapeMaker shape3 = new ShapeMaker("circle3", 0xFFFFFFFF, 50, 900, 300);
-        ShapeMaker shape4 = new ShapeMaker("circle4", 0xFFFFFFFF, 800, 100, 300);
-        ShapeMaker shape5 = new ShapeMaker("circle5", 0xFFFFFFFF, 800, 500, 300);
-        ShapeMaker shape6 = new ShapeMaker("circle6", 0xFFFFFFFF, 800, 900, 300);
-
-        //Shape Array
-        shapeArray[0] = shape1;
-        shapeArray[1] = shape2;
-        shapeArray[2] = shape3;
-        shapeArray[3] = shape4;
-        shapeArray[4] = shape5;
-        shapeArray[5] = shape6;
-
         //TextView Listener for Element Name
         TextView msg = findViewById(R.id.element);
-        View.OnTouchListener touch = new ElementChange(msg, drawing, shapeArray);
+        View.OnTouchListener touch = new ElementChange(msg, drawing, shapeArray, redSeek, greenSeek, blueSeek);
         drawing.setOnTouchListener(touch);
     }
 
