@@ -14,10 +14,14 @@ public class Drawing extends SurfaceView {
     //paint instance
     Paint paintColor = new Paint();
     private int color;
-    private int x;
-    private int y;
+    private int left;
+    private int top;
     private int radius;
-    public ShapeMaker[] shapeArray = new ShapeMaker[6];
+    int right;
+    int bottom;
+
+    private ObjectArray array = new ObjectArray();
+    ShapeMaker[] shapeArray = array.array;
 
     //makes the drawing?
     public Drawing(Context context){
@@ -39,21 +43,62 @@ public class Drawing extends SurfaceView {
 
 
     //should draw the test circles
-    public void onDraw(Canvas canvas/*, ShapeMaker[] shapes*/){
+    public void onDraw(Canvas canvas){
         super.onDraw(canvas);
         setWillNotDraw(false);
-        //this.shapeArray = shapes;
+
+        MakeArray();
 
         //draws my circles
-        canvas.drawOval(, 50, 350, 300, paintColor);
-        canvas.drawOval(50, 350, 350, 600, paintColor);
-        canvas.drawOval(50, 650, 350, 900, paintColor);
-        canvas.drawOval(800, 50, 1100, 300, paintColor);
-        canvas.drawOval(800, 350, 1100, 600, paintColor);
-        canvas.drawOval(800, 650, 1100, 900, paintColor);
+       for (int i=0; i<6; i++){
+           this.left = shapeArray[i].x;
+           this.top = shapeArray[i].y;
+           this.radius = shapeArray[i].radius;
+           this.right = this.left + this.radius;
+           this.bottom = this.top + this.radius;
+           this.paintColor = new Paint(shapeArray[i].color);
 
+           canvas.drawOval(this.left, this.top, this.right, this.bottom, this.paintColor);
+       }
 
     }
+
+    public void MakeArray(){
+
+        //Shape Array
+        this.array.shape1.x = 50;
+        this.array.shape1.y = 20;
+        this.array.shape1.name = "Shape 1";
+        shapeArray[0] = this.array.shape1;
+
+        this.array.shape2.x = 50;
+        this.array.shape2.y = 320;
+        this.array.shape2.name = "Shape 2";
+        shapeArray[1] = this.array.shape2;
+
+        this.array.shape3.x = 50;
+        this.array.shape3.y = 620;
+        this.array.shape3.name = "Shape 3";
+        shapeArray[2] = this.array.shape3;
+
+        this.array.shape4.x = 800;
+        this.array.shape4.y = 20;
+        this.array.shape4.name = "Shape 4";
+        shapeArray[3] = this.array.shape4;
+
+        this.array.shape5.x = 800;
+        this.array.shape5.y = 320;
+        this.array.shape5.name = "Shape 5";
+        shapeArray[4] = this.array.shape5;
+
+        this.array.shape6.x = 800;
+        this.array.shape6.y = 620;
+        this.array.shape6.name = "Shape 6";
+        shapeArray[5] = this.array.shape6;
+    }
+
+    public ObjectArray getArray(){
+        return this.array; }
 
 
 }

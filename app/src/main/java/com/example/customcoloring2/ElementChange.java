@@ -3,6 +3,7 @@ package com.example.customcoloring2;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.shapes.OvalShape;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
@@ -12,12 +13,14 @@ import android.widget.TextView;
 public class ElementChange implements View.OnTouchListener, SeekBar.OnSeekBarChangeListener {
 
     private SeekBar redSeek;
+    private TextView rProg;
     private SeekBar greenSeek;
+    private TextView gProg;
     private SeekBar blueSeek;
-    private Drawing drawing = null;
-    private TextView message;
-    private ShapeMaker[] shapeArray;
-    private Canvas canvas;
+    private TextView bProg;
+    private TextView ele;
+    private Drawing drawing;
+    private ObjectArray array;
     private Paint paintColor;
     private int hex;
     private int tapX;
@@ -27,14 +30,19 @@ public class ElementChange implements View.OnTouchListener, SeekBar.OnSeekBarCha
 
 
     //Change name of shape
-    public ElementChange(TextView msg, Drawing initDrawing, ShapeMaker[] shapes, SeekBar r, SeekBar g, SeekBar b) {
+    public ElementChange(Drawing d, View layout) {
+        drawing = d;
+        array = d.getArray();
 
-        this.drawing = initDrawing;
-        this.message = msg;
-        this.shapeArray = shapes;
-        redSeek = r;
-        greenSeek = g;
-        blueSeek = b;
+        rProg = layout.findViewById(R.id.redCount);
+        gProg = layout.findViewById(R.id.greenCount);
+        bProg = layout.findViewById(R.id.blueCount);
+        ele = layout.findViewById(R.id.element);
+
+        redSeek = layout.findViewById(R.id.redSeekBar);
+        greenSeek = layout.findViewById(R.id.greenSeekBar);
+        blueSeek = layout.findViewById(R.id.blueSeekBar);
+
     }
 
     //This works, but not entirely
@@ -46,14 +54,22 @@ public class ElementChange implements View.OnTouchListener, SeekBar.OnSeekBarCha
 
         for (int i=0; i<6; i++) {
 
-            this.shapeRadius = this.shapeArray[i].radius;
+            Log.d("entered", "Entered");
 
-            if (containsPoint(this.shapeArray[i].x, this.shapeArray[i].y, this.tapX, this.tapY) == true) {
-                this.message.setText(this.shapeArray[i].name);
-                this.shapeArray[i].tapped = true;
+            this.shapeRadius = this.drawing.shapeArray[i].radius;
+            //ele.setText("works");
+
+            if (containsPoint(this.drawing.shapeArray[i].x, this.drawing.shapeArray[i].y, this.tapX, this.tapY) == true) {
+                Log.d("containsPoint", "does");
+                this.ele.setText(this.drawing.shapeArray[i].name);
+                redSeek.setProgress(this.drawing.shapeArray[i].rProg);
+                greenSeek.setProgress(this.drawing.shapeArray[i].gProg);
+                blueSeek.setProgress(this.drawing.shapeArray[i].bProg);
+                this.drawing.shapeArray[i].tapped = true;
             }
             else {
-                this.shapeArray[i].tapped = false;
+                Log.d("containsPoint", "doesn't");
+                this.drawing.shapeArray[i].tapped = false;
             }
         }
         return false;
@@ -62,15 +78,20 @@ public class ElementChange implements View.OnTouchListener, SeekBar.OnSeekBarCha
     //This definitely works
     public boolean containsPoint(int x, int y, int tapX, int tapY){
         //Calculate the distance between this point and the center
-        int xDist = Math.abs(x - tapX);
-        int yDist = Math.abs(y - tapY);
-        int dist = (int)Math.sqrt(xDist*xDist + yDist*yDist);
-        return (dist < this.shapeRadius + TAP_MARGIN);
+
+        if ( tapX >= x && tapX <= x+this.shapeRadius){
+            if (tapY >= y && tapY <= y+this.shapeRadius){
+                return true;
+            }
+            else{ return false; }
+        }
+        else{ return false; }
     }
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        this.message.setText("" + progress);
+
+        Log.d("SeekBar", "entered");
 
         //should be converting into hexadecimal code for the paint color as the sliders move
         //I got help with this from Jake Uyechi but updated some parts to fit my needs
@@ -79,12 +100,21 @@ public class ElementChange implements View.OnTouchListener, SeekBar.OnSeekBarCha
         int g = greenSeek.getProgress();
         int b = blueSeek.getProgress();
 
+
+        this.rProg.setText("" + r);
+        this.gProg.setText("" + g);
+        this.bProg.setText("" + b);
+
         hex = 0xFF000000 + r * 256 * 256 + g * 256 + b;
 
         for (int i=0; i<6; i++){
-            if (this.shapeArray[i].tapped == true){
-                this.shapeArray[i].color = hex;
-                this.drawing.invalidate();
+            if (this.drawing.shapeArray[i].tapped == true){
+
+                Log.d("set new color", "works");
+                this.drawing.shapeArray[i].rProg = r;
+                this.drawing.shapeArray[i].gProg = g;
+                this.drawing.shapeArray[i].bProg = b;
+                drawing.invalidate();
             }
         }
 

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Canvas;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.TouchDelegate;
@@ -16,54 +17,18 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     int hex;
-    public ShapeMaker[] shapeArray = new ShapeMaker[6];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Shapes
-        ShapeMaker shape1 = new ShapeMaker();
-        ShapeMaker shape2 = new ShapeMaker();
-        ShapeMaker shape3 = new ShapeMaker();
-        ShapeMaker shape4 = new ShapeMaker();
-        ShapeMaker shape5 = new ShapeMaker();
-        ShapeMaker shape6 = new ShapeMaker();
-
-        //Shape Array
-        shape1.x = 50;
-        shape1.y = 50;
-        shape1.name = "Shape 1";
-        shapeArray[0] = shape1;
-
-        shape2.x = 50;
-        shape2.y = 350;
-        shape2.name = "Shape 2";
-        shapeArray[1] = shape2;
-
-        shape3.x = 50;
-        shape3.y = 650;
-        shape3.name = "Shape 3";
-        shapeArray[2] = shape3;
-
-        shape4.x = 800;
-        shape4.y = 50;
-        shape4.name = "Shape 4";
-        shapeArray[3] = shape4;
-
-        shape5.x = 800;
-        shape5.y = 350;
-        shape5.name = "Shape 5";
-        shapeArray[4] = shape5;
-
-        shape6.x = 800;
-        shape6.y = 650;
-        shape6.name = "Shape 6";
-        shapeArray[5] = shape6;
-
         //drawing widget
         Drawing drawing = findViewById(R.id.drawing);
+        //Layout Widgets
+        View seekbars = findViewById(R.id.seekbars);
+        View doodle = findViewById(R.id.doodleLayout);
+        View wrapped = findViewById(R.id.Necessary);
         //Red Seekbar Listener
         TextView redBar = findViewById(R.id.redCount);
         //Green Seekbar Listener
@@ -82,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
         blueSeek.setProgress(0);
 
         //Seekbar Color Updates
-        SeekBar.OnSeekBarChangeListener GseekListener = new ElementChange(greenBar, drawing, shapeArray, redSeek, greenSeek, blueSeek);
-        SeekBar.OnSeekBarChangeListener RseekListener = new ElementChange(redBar, drawing, shapeArray, redSeek, greenSeek, blueSeek);
-        SeekBar.OnSeekBarChangeListener BseekListener = new ElementChange(blueBar, drawing, shapeArray, redSeek, greenSeek, blueSeek);
+        SeekBar.OnSeekBarChangeListener GseekListener = new ElementChange(drawing, wrapped);
+        SeekBar.OnSeekBarChangeListener RseekListener = new ElementChange(drawing, wrapped);
+        SeekBar.OnSeekBarChangeListener BseekListener = new ElementChange(drawing, wrapped);
 
         //Seekbar Listeners
         redSeek.setOnSeekBarChangeListener(RseekListener);
@@ -92,8 +57,7 @@ public class MainActivity extends AppCompatActivity {
         blueSeek.setOnSeekBarChangeListener(BseekListener);
 
         //TextView Listener for Element Name
-        TextView msg = findViewById(R.id.element);
-        View.OnTouchListener touch = new ElementChange(msg, drawing, shapeArray, redSeek, greenSeek, blueSeek);
+        View.OnTouchListener touch = new ElementChange(drawing, wrapped);
         drawing.setOnTouchListener(touch);
     }
 
