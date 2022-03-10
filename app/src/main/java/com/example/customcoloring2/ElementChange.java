@@ -25,6 +25,9 @@ public class ElementChange implements View.OnTouchListener, SeekBar.OnSeekBarCha
     private int hex;
     private int tapX;
     private int tapY;
+    int r;
+    int g;
+    int b;
     private int shapeRadius;
     public static final int TAP_MARGIN = 10;
 
@@ -51,27 +54,34 @@ public class ElementChange implements View.OnTouchListener, SeekBar.OnSeekBarCha
 
         this.tapX = (int)motionEvent.getX();
         this.tapY = (int)motionEvent.getY();
+        int currTap = -1;
 
         for (int i=0; i<6; i++) {
 
             Log.d("entered", "Entered");
 
-            this.shapeRadius = this.drawing.shapeArray[i].radius;
+            this.shapeRadius = drawing.shapeArray[i].radius;
             //ele.setText("works");
 
-            if (containsPoint(this.drawing.shapeArray[i].x, this.drawing.shapeArray[i].y, this.tapX, this.tapY) == true) {
+            if (containsPoint(drawing.shapeArray[i].x, drawing.shapeArray[i].y, this.tapX, this.tapY) == true) {
                 Log.d("containsPoint", "does");
-                this.ele.setText(this.drawing.shapeArray[i].name);
-                redSeek.setProgress(this.drawing.shapeArray[i].rProg);
-                greenSeek.setProgress(this.drawing.shapeArray[i].gProg);
-                blueSeek.setProgress(this.drawing.shapeArray[i].bProg);
-                this.drawing.shapeArray[i].tapped = true;
+                currTap = i;
+                drawing.shapeArray[i].tapped = true;
             }
             else {
                 Log.d("containsPoint", "doesn't");
-                this.drawing.shapeArray[i].tapped = false;
+                drawing.shapeArray[i].tapped = false;
             }
         }
+
+
+        if (currTap >= 0) {
+            this.ele.setText(drawing.shapeArray[currTap].name);
+            redSeek.setProgress(drawing.shapeArray[currTap].rProg);
+            greenSeek.setProgress(drawing.shapeArray[currTap].gProg);
+            blueSeek.setProgress(drawing.shapeArray[currTap].bProg);
+        }
+
         return false;
     }
 
@@ -96,9 +106,9 @@ public class ElementChange implements View.OnTouchListener, SeekBar.OnSeekBarCha
         //should be converting into hexadecimal code for the paint color as the sliders move
         //I got help with this from Jake Uyechi but updated some parts to fit my needs
         //@author Jake Uyechi
-        int r = redSeek.getProgress();
-        int g = greenSeek.getProgress();
-        int b = blueSeek.getProgress();
+        this.r = redSeek.getProgress();
+        this.g = greenSeek.getProgress();
+        this.b = blueSeek.getProgress();
 
 
         this.rProg.setText("" + r);
@@ -108,15 +118,16 @@ public class ElementChange implements View.OnTouchListener, SeekBar.OnSeekBarCha
         hex = 0xFF000000 + r * 256 * 256 + g * 256 + b;
 
         for (int i=0; i<6; i++){
-            if (this.drawing.shapeArray[i].tapped == true){
+            if (drawing.shapeArray[i].tapped == true){
 
                 Log.d("set new color", "works");
-                this.drawing.shapeArray[i].rProg = r;
-                this.drawing.shapeArray[i].gProg = g;
-                this.drawing.shapeArray[i].bProg = b;
-                drawing.invalidate();
+                drawing.shapeArray[i].rProg = this.r;
+                drawing.shapeArray[i].gProg = this.g;
+                drawing.shapeArray[i].bProg = this.b;
+                drawing.shapeArray[i].color = hex;
             }
         }
+        drawing.invalidate();
 
     }
 
